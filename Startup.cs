@@ -24,6 +24,7 @@ namespace RazorPagesLab3
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddScoped<IService<Product>, Service<Product>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

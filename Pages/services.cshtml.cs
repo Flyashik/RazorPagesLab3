@@ -9,6 +9,14 @@ namespace RazorPagesLab3.Pages
 {
     public class servicesModel : PageModel
     {
+        private IService<Product> _service;
+        public IEnumerable<Product> Products { get; set; }
+        public servicesModel(IService<Product> service)
+        {
+            this._service = service;
+            Products = service.getContent("Product.json");
+        }
+
         public void OnGet()
         {
         }
