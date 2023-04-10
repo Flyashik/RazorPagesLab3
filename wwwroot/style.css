@@ -1750,7 +1750,6 @@ hr.invis1 {
 
 .dropdown-menu > li > a {
     background-color: transparent !important;
-    color: #bcbcbc !important;
     font-size: 15px;
     padding: 10px 20px;
 }
@@ -1965,7 +1964,6 @@ select.mobile-device {
     border: 0 !important;
     padding: 0;
     width: 100%;
-    color: #bcbcbc !important;
 }
 
 .contact_form {
@@ -1980,7 +1978,6 @@ select.mobile-device {
     margin-bottom: 30px;
     border: 1px solid #ebebeb;
     box-sizing: border-box;
-    color: #bcbcbc;
     font-size: 16px;
     outline: 0 none;
     padding: 10px 25px;
@@ -1991,7 +1988,6 @@ select.mobile-device {
 }
 
 .contact_form textarea {
-    color: #bcbcbc;
     padding: 20px 25px !important;
     height: 160px !important;
 }

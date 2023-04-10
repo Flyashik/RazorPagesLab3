@@ -4,6 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Threading;
+using CsvHelper;
+using CsvHelper.Configuration;
+using System.Globalization;
 
 namespace RazorPagesLab3
 {
@@ -46,6 +50,37 @@ namespace RazorPagesLab3
         public string? Icon { get; set; }
     }
 
-    //[Serializable]
-    //public class 
+    public class ContactsWriter
+    {
+        private string filename = "contacts.csv";
+
+        public void WriteInCSV(ContactForm contact)
+        {
+            using (Mutex mutex = new Mutex(false, "CsvWriterMutex"))
+            {
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    HasHeaderRecord = false,
+                };
+                mutex.WaitOne();
+                using (var writer = new CsvWriter(new StreamWriter(filename, true), config))
+                {
+                    writer.WriteRecord(contact);
+                    writer.NextRecord();
+                }
+                mutex.ReleaseMutex();
+            }
+        }
+    }
+
+    public class ContactForm
+    {
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Email { get; set; }
+        public string? Phone { get; set; }
+        public string? SelectService { get; set; }
+        public string? SelectPrice { get; set; }
+        public string? Comments { get; set; }
+    }
 }
