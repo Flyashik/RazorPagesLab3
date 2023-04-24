@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesLab3.Pages
 {
+    [IgnoreAntiforgeryToken]
     public class contactModel : PageModel
     {
         private readonly ContactsWriter cw;
@@ -19,7 +20,7 @@ namespace RazorPagesLab3.Pages
 
         public void OnGet() {}
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             ContactForm contact = new ContactForm();
             contact.FirstName = Request.Form["first_name"];
@@ -30,6 +31,10 @@ namespace RazorPagesLab3.Pages
             contact.SelectPrice = Request.Form["select_price"];
             contact.Comments = Request.Form["comments"];
             cw.WriteInCSV(contact);
+
+            Response.StatusCode = 200;
+
+            return Content("Привет! Что там с телеграмом?");
         }
     }
 }

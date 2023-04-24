@@ -53,23 +53,21 @@ namespace RazorPagesLab3
     public class ContactsWriter
     {
         private string filename = "contacts.csv";
+        private Mutex mutex = new Mutex(false, "CsvWriterMutex");
 
         public void WriteInCSV(ContactForm contact)
         {
-            using (Mutex mutex = new Mutex(false, "CsvWriterMutex"))
-            {
-                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-                {
-                    HasHeaderRecord = false,
-                };
-                mutex.WaitOne();
-                using (var writer = new CsvWriter(new StreamWriter(filename, true), config))
-                {
-                    writer.WriteRecord(contact);
-                    writer.NextRecord();
-                }
-                mutex.ReleaseMutex();
-            }
+             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+             {
+                 HasHeaderRecord = false,
+             };
+             mutex.WaitOne();
+             using (var writer = new CsvWriter(new StreamWriter(filename, true), config))
+             {
+                 writer.WriteRecord(contact);
+                 writer.NextRecord();
+             }
+             mutex.ReleaseMutex();   
         }
     }
 

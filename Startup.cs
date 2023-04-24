@@ -49,6 +49,7 @@ namespace RazorPagesLab3
 
             app.UseAuthorization();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
