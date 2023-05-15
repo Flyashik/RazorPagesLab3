@@ -16,7 +16,6 @@ namespace RazorPagesLab3
     {
         public static void Main(string[] args)
         {
-            SQLitePCL.Batteries.Init();
             CreateHostBuilder(args).Build().Run();
         }
 
