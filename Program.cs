@@ -8,6 +8,7 @@ using System.Threading;
 using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
+using System.ComponentModel.DataAnnotations;
 
 namespace RazorPagesLab3
 {
@@ -15,6 +16,7 @@ namespace RazorPagesLab3
     {
         public static void Main(string[] args)
         {
+            SQLitePCL.Batteries.Init();
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -73,6 +75,8 @@ namespace RazorPagesLab3
 
     public class ContactForm
     {
+        [Key]
+        public int Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Email { get; set; }
